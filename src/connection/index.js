@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 const dbPath = "mongodb://localhost:27017/bc-hack";
 mongoose.connect(dbPath, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 const db = mongoose.connection;
 db.on("error", () => {
