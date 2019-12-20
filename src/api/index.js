@@ -1,6 +1,6 @@
 import { version } from '../../package.json';
 import { Router } from 'express';
-import questions from './../routes/questions';
+import questions from '../modules/questions/routes';
 
 export default ({ config, db }) => {
 	let api = Router();
