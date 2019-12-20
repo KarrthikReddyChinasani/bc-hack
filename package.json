@@ -36,10 +36,13 @@
     "cors": "^2.7.1",
     "dotenv": "^8.2.0",
     "express": "^4.13.3",
+    "express-oas-generator": "^1.0.18",
     "joi": "^14.3.1",
+    "loadsh": "0.0.4",
     "mongoose": "^5.8.1",
     "morgan": "^1.8.0",
-    "resource-router-middleware": "^0.6.0"
+    "resource-router-middleware": "^0.6.0",
+    "swagger-ui-express": "^4.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",
