@@ -23,6 +23,18 @@ const getQuestions = async payload => {
   });
 };
 
+const getQuestionsByIds = async payload => {
+  const filter = payload === "" ? {} : { _id: payload };
+  return new Promise((resolve, reject) => {
+    return Questions.find(filter, (error, docs) => {
+      if (error != null) {
+        return reject(error);
+      }
+      return resolve(docs);
+    });
+  });
+};
+
 const updateQuestion = async payload => {
   const { id, body } = payload;
   const filter = { _id: id };
@@ -53,4 +65,10 @@ const deleteQuestion = payload => {
   });
 };
 
-module.exports = { addQuestion, getQuestions, updateQuestion, deleteQuestion };
+module.exports = {
+  addQuestion,
+  getQuestions,
+  updateQuestion,
+  deleteQuestion,
+  getQuestionsByIds
+};

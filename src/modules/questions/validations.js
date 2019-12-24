@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { validateJoi } from "./../../utils";
 
 const createSchemaQuestion = Joi.object().keys({
   question: Joi.string().required(),
@@ -125,10 +126,6 @@ const validateUpdateQuestion = async payload => {
 
 const validateDeleteQuestion = async payload => {
   return await validateJoi(deleteSchemaQuestion, payload);
-};
-
-const validateJoi = async (schema, payload) => {
-  return await Joi.validate(payload, schema, (err, value) => [value, err]);
 };
 
 module.exports = {

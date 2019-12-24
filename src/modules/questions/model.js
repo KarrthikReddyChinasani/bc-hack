@@ -22,6 +22,6 @@ const schema = {
   testCases: [testCasesSchema]
 };
 const collectionName = "questions"; // Name of the collection of documents
-const questionsSchema = mongoose.Schema(schema);
+const questionsSchema = mongoose.Schema(schema, { timestamps: true });
 const Questions = mongoose.model(collectionName, questionsSchema);
 module.exports = Questions;
