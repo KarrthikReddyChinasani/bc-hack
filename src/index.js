@@ -9,21 +9,25 @@ import api from "./api";
 import config from "./config.json";
 import dotenv from "dotenv";
 import expressOasGenerator from "express-oas-generator";
-import _ from 'loadsh';
-
+import _ from "loadsh";
+import passport from "passport";
+import "./config/passport";
 dotenv.config();
 
 let app = express();
 expressOasGenerator.init(app, function(spec) {
-    _.set(spec, 'info.title', 'BC Hack');
-    _.set(spec, 'paths[\'/path\'].get.parameters[0].example', 2);
-    return spec;
+  _.set(spec, "info.title", "BC Hack");
+  _.set(spec, "paths['/path'].get.parameters[0].example", 2);
+  return spec;
 });
 
 app.server = http.createServer(app);
 
 // logger
 app.use(morgan("dev"));
+
+// passport initialize
+app.use(passport.initialize());
 
 // 3rd party middleware
 app.use(
