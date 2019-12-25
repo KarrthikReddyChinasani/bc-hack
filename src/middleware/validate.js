@@ -7,31 +7,53 @@ const oAuth2Client = new OAuth2Client(
 );
 
 const isAuthenticated = async accessToken => {
-  const tokenInfo = await oAuth2Client.getTokenInfo(accessToken);
-  console.log("tokenInfo", tokenInfo);
-  const { exp } = tokenInfo;
-  const moment = Math.floor(Date.now() / 1000);
-  if (moment < exp) {
-    return true;
-  }
-  return false;
+  return oAuth2Client
+    .getTokenInfo(accessToken)
+    .then(res => {
+      const { exp } = res;
+      const moment = Math.floor(Date.now() / 1000);
+      if (moment < exp) {
+        return true;
+      }
+      return false;
+    })
+    .catch(err => {
+      console.log(err);
+      return false;
+    });
 };
 
-module.exports = function(req, res, next) {
-  if (
-    req.path !== "/api/auth/google" &&
-    req.path !== "/api/auth/google/callback"
-  ) {
-    if (req.headers["authorization"]) {
-      if (isAuthenticated(req.headers["authorization"])) {
-        return next();
+module.exports = async function(req, res, next) {
+  const {
+    headers: { authorization }
+  } = req;
+  try {
+    if (
+      req.path !== "/api/auth/google" &&
+      req.path !== "/api/auth/google/callback"
+    ) {
+      const isValid = await isAuthenticated(authorization);
+      console.log("is_valid", isValid);
+      if (req.headers["authorization"]) {
+        if (isValid) {
+          console.log("I am here");
+          return next();
+        } else {
+          res.send({
+            statusCode: 401,
+            data: "Unauthorized user, Please login"
+          });
+        }
       } else {
-        res.send({ statusCode: 401, data: "Unauthorized user, Please login" });
+        res.send({ statusCode: 401, data: "Authorization header is required" });
       }
     } else {
-      res.send({ statusCode: 401, data: "Authorization header is required" });
+      return next();
     }
-  } else {
-    return next();
+  } catch (error) {
+    res.send({
+      statusCode: 401,
+      data: "Unauthorized user, Please login"
+    });
   }
 };
