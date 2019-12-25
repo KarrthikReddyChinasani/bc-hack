@@ -30,13 +30,13 @@ module.exports = async function(req, res, next) {
   try {
     if (
       req.path !== "/api/auth/google" &&
-      req.path !== "/api/auth/google/callback"
+      req.path !== "/api/auth/google/callback" &&
+      req.path !== "/api/api-docs"
     ) {
       const isValid = await isAuthenticated(authorization);
       console.log("is_valid", isValid);
       if (req.headers["authorization"]) {
         if (isValid) {
-          console.log("I am here");
           return next();
         } else {
           res.send({
