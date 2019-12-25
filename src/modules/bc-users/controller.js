@@ -11,7 +11,6 @@ const redirect = async (req, res) => {
     user: { token }
   } = req;
   const data = await updateUserData(user);
-  console.log("data", data);
   const { _id } = data;
   res.redirect(`http://localhost:3000?token=${token}&id=${_id}`);
 };

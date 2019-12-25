@@ -62,7 +62,6 @@ const getQuestions = async filter => {
 
 const updateExam = async payload => {
   const { body, userId, id } = payload;
-  console.log("here", body, userId, id);
   body["updated_by"] = userId;
   return UpdateExamData({ body, id })
     .then(res => res)

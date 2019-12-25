@@ -26,7 +26,6 @@ module.exports = async function(req, res, next) {
   const {
     headers: { authorization }
   } = req;
-  console.log("req path", req.path);
   if (
     req.path.includes("api/auth/google") ||
     req.path.includes("api-docs") ||

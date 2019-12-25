@@ -19,7 +19,6 @@ const fetchExams = async () => {
 
 const UpdateExamData = async payload => {
   const { id, body } = payload;
-  console.log("id", id, body);
   const filter = { _id: id };
   return new Promise((resolve, reject) => {
     return Exam.findOneAndUpdate(
