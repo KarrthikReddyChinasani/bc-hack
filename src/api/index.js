@@ -2,7 +2,7 @@ import { version } from "../../package.json";
 import { Router } from "express";
 import questions from "../modules/questions/routes";
 import exams from "../modules/exams/routes";
-import auth from "../modules/auth/routes";
+import auth from "../modules/bc-users/routes";
 
 export default ({ config, db }) => {
   let api = Router();

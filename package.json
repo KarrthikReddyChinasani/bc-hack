@@ -37,6 +37,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.13.3",
     "express-oas-generator": "^1.0.18",
+    "google-auth-library": "^5.7.0",
     "joi": "^14.3.1",
     "loadsh": "0.0.4",
     "mongoose": "^5.8.1",

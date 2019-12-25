@@ -18,7 +18,8 @@ passport.use(
       var userData = {
         email: profile.emails[0].value,
         name: profile.displayName,
-        token: accessToken
+        token: accessToken,
+        refreshToken: refreshToken
       };
       done(null, userData);
     }

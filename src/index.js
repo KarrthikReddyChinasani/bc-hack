@@ -12,6 +12,9 @@ import expressOasGenerator from "express-oas-generator";
 import _ from "loadsh";
 import passport from "passport";
 import "./config/passport";
+
+import validate from "./middleware/validate";
+
 dotenv.config();
 
 let app = express();
@@ -25,6 +28,8 @@ app.server = http.createServer(app);
 
 // logger
 app.use(morgan("dev"));
+
+app.use(validate);
 
 // passport initialize
 app.use(passport.initialize());
