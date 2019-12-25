@@ -18,7 +18,6 @@ const isAuthenticated = async accessToken => {
       return false;
     })
     .catch(err => {
-      console.log(err);
       return false;
     });
 };
@@ -27,28 +26,28 @@ module.exports = async function(req, res, next) {
   const {
     headers: { authorization }
   } = req;
+  console.log("req path", req.path);
+  if (
+    req.path.includes("api/auth/google") ||
+    req.path.includes("api-docs") ||
+    req.path.includes("health") ||
+    req.path.includes("favicon.ico")
+  ) {
+    return next();
+  }
   try {
-    if (
-      req.path !== "/api/auth/google" &&
-      req.path !== "/api/auth/google/callback" &&
-      req.path !== "/api/api-docs"
-    ) {
-      const isValid = await isAuthenticated(authorization);
-      console.log("is_valid", isValid);
-      if (req.headers["authorization"]) {
-        if (isValid) {
-          return next();
-        } else {
-          res.send({
-            statusCode: 401,
-            data: "Unauthorized user, Please login"
-          });
-        }
+    const isValid = await isAuthenticated(authorization);
+    if (req.headers["authorization"]) {
+      if (isValid) {
+        return next();
       } else {
-        res.send({ statusCode: 401, data: "Authorization header is required" });
+        res.send({
+          statusCode: 401,
+          data: "Unauthorized user, Please login"
+        });
       }
     } else {
-      return next();
+      res.send({ statusCode: 401, data: "Authorization header is required" });
     }
   } catch (error) {
     res.send({
