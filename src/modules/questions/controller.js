@@ -11,12 +11,14 @@ import {
   validateDeleteQuestion
 } from "./validations";
 import { getJoiError, handleResponse } from "./../../utils";
-import e from "express";
 
 const create = async (req, res) => {
   const [value, validation] = await validateCreateQuestion(req.body);
+  const {
+    headers: { userid }
+  } = req;
   if (validation == null) {
-    handleResponse(res, createQuestion, req.body);
+    handleResponse(res, createQuestion, { body: req.body, userid });
   } else {
     res.send({ statusCode: 400, error: getJoiError(validation) });
   }
@@ -37,11 +39,12 @@ const retrieveQuestions = async (req, res) => {
 const updateQuestion = async (req, res) => {
   const {
     params: { id },
+    headers: { userid },
     body
   } = req;
   const [value, validation] = await validateUpdateQuestion({ id, body });
   if (validation == null) {
-    handleResponse(res, updateQuestionData, { id, body });
+    handleResponse(res, updateQuestionData, { id, body, userid });
   } else {
     res.send({ statusCode: 400, error: getJoiError(validation) });
   }

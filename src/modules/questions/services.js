@@ -6,7 +6,10 @@ import {
 } from "./dal";
 
 const createQuestion = async payload => {
-  return addQuestion(payload)
+  let { body, userid } = payload;
+  body["created_by"] = userid;
+  body["updated_by"] = userid;
+  return addQuestion(body)
     .then(res => res)
     .catch(err => {
       return err;
@@ -22,7 +25,9 @@ const fetchQuestions = async (payload = "") => {
 };
 
 const updateQuestionData = async payload => {
-  return updateQuestion(payload)
+  let { id, body, userid } = payload;
+  body["updated_by"] = userid;
+  return updateQuestion({ id, body })
     .then(res => res)
     .catch(err => err);
 };

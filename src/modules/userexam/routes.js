@@ -1,7 +1,8 @@
 import { Router } from "express";
 const route = Router();
-import { create, get } from "./controller";
+import { get, update } from "./controller";
 
-route.post("/", create);
 route.get("/:id", get);
+route.put("/", update);
+
 module.exports = route;
