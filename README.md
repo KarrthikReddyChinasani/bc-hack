@@ -3,7 +3,7 @@
 ```sh
 # clone it
 git clone https://github.com/KarrthikReddyChinasani/bc-hack.git
-cd express-es6-rest-api
+cd bc-hack
 
 # Make it your own
 rm -rf .git && git init && npm init
@@ -21,7 +21,7 @@ PORT=8080 npm start
 ## Docker Support
 
 ```sh
-cd express-es6-rest-api
+cd bc-hack
 
 # Build your docker
 docker build -t ba-hack/latest .
