@@ -18,6 +18,9 @@ const schema = {
   items: [] // need to find a way to remove this and add it in service file
 };
 const collectionName = "exams"; // Name of the collection of documents
-const examsSchema = mongoose.Schema(schema, { timestamps: true });
+const examsSchema = mongoose.Schema(schema, {
+  timestamps: true,
+  versionKey: false
+});
 const Exams = mongoose.model(collectionName, examsSchema);
 module.exports = Exams;

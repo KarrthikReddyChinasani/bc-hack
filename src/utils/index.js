@@ -1,5 +1,10 @@
 import Joi from "joi";
 import _ from "loadsh";
+const MailService = require("@sendgrid/mail");
+console.log("key", process.env.SENDGRID);
+MailService.setApiKey(
+  "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"
+);
 
 const getJoiError = error => {
   if (error === null) {
@@ -32,10 +37,21 @@ const combineObjects = async (obj1, obj2) => {
   });
 };
 
+const triggerEmail = async msg => {
+  MailService.send(msg)
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
 module.exports = {
   getJoiError,
   handleResponse,
   validateJoi,
   findChild,
-  combineObjects
+  combineObjects,
+  triggerEmail
 };

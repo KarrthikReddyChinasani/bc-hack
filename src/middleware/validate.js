@@ -30,7 +30,10 @@ module.exports = async function(req, res, next) {
     req.path.includes("api/auth/google") ||
     req.path.includes("api-docs") ||
     req.path.includes("health") ||
-    req.path.includes("favicon.ico")
+    req.path.includes("favicon.ico") ||
+    req.path.includes("api/user/update") ||
+    req.path.includes("api/user/submit") ||
+    req.path.includes("api/usersexam/update")
   ) {
     return next();
   }
