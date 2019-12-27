@@ -11,6 +11,9 @@ const schema = {
   endTime: { type: SchemaTypes.String, default: "" }
 };
 const collectionName = "userexam"; // Name of the collection of documents
-const UserExamSchema = mongoose.Schema(schema, { timestamps: true });
+const UserExamSchema = mongoose.Schema(schema, {
+  timestamps: true,
+  versionKey: false
+});
 const UserExam = mongoose.model(collectionName, UserExamSchema);
 module.exports = UserExam;

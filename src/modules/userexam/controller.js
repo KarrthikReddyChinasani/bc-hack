@@ -1,5 +1,5 @@
 import { getJoiError, handleResponse } from "./../../utils";
-import { getUserData } from "./service";
+import { getUserData, updateData } from "./service";
 const get = (req, res) => {
   const {
     params: { id }
@@ -7,6 +7,12 @@ const get = (req, res) => {
   handleResponse(res, getUserData, { id });
 };
 
-const update = (req, res) => {};
+const update = (req, res) => {
+  const {
+    params: { id },
+    body
+  } = req;
+  handleResponse(res, updateData, { id, body });
+};
 
 module.exports = { get, update };

@@ -14,4 +14,15 @@ const getUser = ({ id }) => {
     .catch(err => err);
 };
 
-module.exports = { insertUser, getUser };
+const updateByUser = ({ id, body }) => {
+  const filter = { _id: id };
+  return User.findOneAndUpdate(filter, body, {
+    new: true,
+    upsert: true,
+    setDefaultsOnInsert: true
+  })
+    .then(doc => doc)
+    .catch(err => err);
+};
+
+module.exports = { insertUser, getUser, updateByUser };

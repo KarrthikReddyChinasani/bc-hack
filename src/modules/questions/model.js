@@ -24,6 +24,9 @@ const schema = {
   updated_by: { type: SchemaTypes.String, required: true }
 };
 const collectionName = "questions"; // Name of the collection of documents
-const questionsSchema = mongoose.Schema(schema, { timestamps: true });
+const questionsSchema = mongoose.Schema(schema, {
+  timestamps: true,
+  versionKey: false
+});
 const Questions = mongoose.model(collectionName, questionsSchema);
 module.exports = Questions;

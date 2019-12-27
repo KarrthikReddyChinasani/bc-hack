@@ -1,5 +1,5 @@
 import { getJoiError, handleResponse } from "./../../utils";
-import { createUser, getDetails } from "./service";
+import { createUser, getDetails, updateUser, updateData } from "./service";
 
 const create = (req, res) => {
   const {
@@ -15,4 +15,20 @@ const get = (req, res) => {
   handleResponse(res, getDetails, { id });
 };
 
-module.exports = { create, get };
+const updateByUser = (req, res) => {
+  const {
+    params: { id },
+    body
+  } = req;
+  handleResponse(res, updateUser, { id, body });
+};
+
+const update = (req, res) => {
+  const {
+    params: { id },
+    body
+  } = req;
+  handleResponse(res, updateData, { id, body });
+};
+
+module.exports = { create, get, update, updateByUser };

@@ -12,4 +12,16 @@ const getDataById = async _id => {
     .catch(err => err);
 };
 
-module.exports = { createExam, getDataById };
+const update = async ({ id, body }) => {
+  const filter = { _id: id };
+  console.log("data", id, body);
+  return UserExam.findOneAndUpdate(filter, body, {
+    new: true,
+    upsert: true,
+    setDefaultsOnInsert: true
+  })
+    .then(doc => "Data updated successfully")
+    .catch(err => "Something went wrong");
+};
+
+module.exports = { createExam, getDataById, update };

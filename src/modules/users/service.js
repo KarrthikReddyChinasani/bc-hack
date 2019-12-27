@@ -1,4 +1,4 @@
-import { insertUser, getUser } from "./dal";
+import { insertUser, getUser, updateByUser } from "./dal";
 import { createExam } from "./../userexam/dal";
 import { triggerEmail } from "./../../utils";
 import getUserExamTemplate from "./../../templates/user-exam";
@@ -38,8 +38,13 @@ const sendMail = async ({ email, id }) => {
 
 const getDetails = async ({ id }) => {
   const res = await getUser({ id });
-  console.log("res", res);
   return res;
 };
 
-module.exports = { createUser, getDetails };
+const updateUser = async payload => {
+  const response = await updateByUser(payload);
+  return response;
+};
+
+const updateData = async ({ id, body }) => {};
+module.exports = { createUser, getDetails, updateUser, updateData };

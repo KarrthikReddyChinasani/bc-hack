@@ -1,4 +1,4 @@
-import { getDataById } from "./dal";
+import { getDataById, update } from "./dal";
 const getUserData = payload => {
   const { id } = payload;
   return getDataById(id)
@@ -6,4 +6,9 @@ const getUserData = payload => {
     .catch(err => err);
 };
 
-module.exports = { getUserData };
+const updateData = async payload => {
+  const response = await update(payload);
+  return response;
+};
+
+module.exports = { getUserData, updateData };

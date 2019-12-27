@@ -9,6 +9,9 @@ const schema = {
   experiance: { type: SchemaTypes.String, required: false }
 };
 const collectionName = "users"; // Name of the collection of documents
-const UsersSchema = mongoose.Schema(schema, { timestamps: true });
+const UsersSchema = mongoose.Schema(schema, {
+  timestamps: true,
+  versionKey: false
+});
 const Users = mongoose.model(collectionName, UsersSchema);
 module.exports = Users;
